@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM amd64/alpine:3.12
 
 RUN apk --no-cache add \
     bash \
@@ -21,7 +21,7 @@ RUN apk --no-cache add \
     w3m \
     wget
 
-RUN cd /usr/local/bin && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.5/bin/linux/amd64/kubectl
+RUN cd /usr/local/bin && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
 CMD ["/bin/bash"]
 
