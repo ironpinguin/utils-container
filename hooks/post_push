@@ -10,7 +10,7 @@ chmod +x manifest-tool
 
 
 if [ "${SOURCE_BRANCH}x" != "masterx" ];then
-  sed "s/:latest/:${SOURCE_BRANCH}/;s/:amd64/:${SOURCE_BRANCH}-amd64/;s/:arm(.*)/:${SOURCE_BRANCH}-arm\1/" multi-arch-manifest.yaml > branch-manifest.yaml
+  sed "s/:latest/:${SOURCE_BRANCH}/;s/:amd64/:${SOURCE_BRANCH}-amd64/;s/:arm\(.*\)/:${SOURCE_BRANCH}-arm\1/" multi-arch-manifest.yaml > branch-manifest.yaml
   ./manifest-tool push from-spec branch-manifest.yaml
   rm branch-manifest.yaml
 else
