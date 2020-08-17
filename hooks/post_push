@@ -3,7 +3,16 @@
 # Use manifest-tool to create the manifest, given the experimental
 # "docker manifest" command isn't available yet on Docker Hub.
 
+  
+
 curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
 chmod +x manifest-tool
 
-./manifest-tool push from-spec multi-arch-manifest.yaml
+
+if [ "${SOURCE_BRANCH}x" != "masterx" ];then
+  sed "s/:latest/:${SOURCE_BRANCH}/;s/:amd64/:${SOURCE_BRANCH}-amd64/;s/:arm(.*)/:${SOURCE_BRANCH}-arm\1/" multi-arch-manifest.yaml > branch-manifest.yaml
+  ./manifest-tool push from-spec branch-manifest.yaml
+  rm branch-manifest.yaml
+else
+  ./manifest-tool push from-spec multi-arch-manifest.yaml
+fi
