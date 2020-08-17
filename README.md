@@ -21,6 +21,7 @@ A simple utils container with most useful tools
 * vim
 * w3m
 * wget
+* aws-cli
 * kubectl
 
 Hove fun!
